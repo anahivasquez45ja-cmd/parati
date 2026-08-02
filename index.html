@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Química Mayor ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+overflow:hidden;
+width:100%;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:'Montserrat',sans-serif;
+
+background:transparent;
+}
+/*==========================
+PARTICULAS
+==========================*/
+
+#canvas{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-5;
+}
+
+/*==========================
+FONDO
+==========================*/
+
+body::before{
+
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+
+background:
+
+radial-gradient(circle,
+ rgba(255,70,120,.12),
+transparent 70%);
+
+animation:pulse 6s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+transform:scale(1);
+opacity:.3;
+}
+
+50%{
+transform:scale(1.2);
+opacity:.8;
+}
+
+100%{
+transform:scale(1);
+opacity:.3;
+}
+
+}
+
+/*==========================
+REPRODUCTOR
+==========================*/
+
+.main{
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+}
+
+.reproductor{
+
+width:500px;
+
+padding:45px;
+
+background:rgba(20, 5, 10, 0);
+
+backdrop-filter:blur(18px);
+
+border-radius:30px;
+
+border:1px solid rgba(255,100,140,.25);
+
+box-shadow:
+
+0 0 50px rgba(255,0,80,.25),
+
+0 0 120px rgba(255,40,90,.12);
+
+text-align:center;
+
+}
+
+/*==========================
+VINILO
+==========================*/
+
+.disc{
+
+width:320px;
+height:320px;
+
+margin:auto;
+
+border-radius:50%;
+
+overflow:hidden;
+
+position:relative;
+
+animation:spin 25s linear infinite;
+
+box-shadow:
+
+0 0 45px rgba(255,0,80,.35);
+
+}
+
+.disc img{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+}
+
+.disc::after{
+
+content:"";
+
+position:absolute;
+
+width:55px;
+height:55px;
+
+background:#111;
+
+border-radius:50%;
+
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+border:6px solid #9d1338;
+
+}
+
+/*==========================
+TEXTO
+==========================*/
+
+.playing{
+
+margin-bottom:30px;
+
+color:#ffcad4;
+
+letter-spacing:4px;
+
+font-size:13px;
+
+text-transform:uppercase;
+
+}
+
+.info{
+
+margin-top:35px;
+
+}
+
+.info h1{
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:52px;
+
+color:#fff;
+
+font-weight:700;
+
+}
+
+.info p{
+
+margin-top:10px;
+
+font-size:20px;
+
+color:#ffc2d1;
+
+}
+
+/*==========================
+BOTON
+==========================*/
+
+.control-btn{
+
+margin-top:35px;
+
+width:82px;
+height:82px;
+
+border:none;
+
+border-radius:50%;
+
+background:#98143d;
+
+cursor:pointer;
+
+color:white;
+
+font-size:26px;
+
+transition:.4s;
+
+box-shadow:
+
+0 0 20px rgba(255,40,80,.4);
+
+}
+
+.control-btn:hover{
+
+transform:scale(1.12);
+
+background:#bf1d4c;
+
+box-shadow:
+
+0 0 35px rgba(255,30,90,.7);
+
+}
+
+/*==========================
+FRASE
+==========================*/
+
+.frase{
+
+margin-top:35px;
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:26px;
+
+font-style:italic;
+
+color:#ffe5ec;
+
+opacity:.85;
+
+}
+
+/*==========================
+CORAZONES
+==========================*/
+
+.heart{
+
+position:absolute;
+
+font-size:28px;
+
+color:#ff6b81;
+
+animation:float 10s linear infinite;
+
+opacity:.6;
+
+}
+
+@keyframes float{
+
+0%{
+
+transform:
+translateY(120vh)
+scale(.5);
+
+opacity:0;
+
+}
+
+15%{
+
+opacity:.7;
+
+}
+
+100%{
+
+transform:
+translateY(-120vh)
+scale(1.5);
+
+opacity:0;
+
+}
+
+}
+
+/*==========================
+BRILLOS
+==========================*/
+
+.spark{
+
+position:absolute;
+
+width:4px;
+height:4px;
+
+background:white;
+
+border-radius:50%;
+
+box-shadow:
+0 0 15px white;
+
+animation:twinkle 2s infinite;
+
+}
+
+@keyframes twinkle{
+
+0%{
+opacity:.2;
+transform:scale(.4);
+}
+
+50%{
+opacity:1;
+transform:scale(1.4);
+}
+
+100%{
+opacity:.2;
+transform:scale(.4);
+}
+
+}
+
+/*==========================
+VINILO
+==========================*/
+
+@keyframes spin{
+
+from{
+transform:rotate(0deg);
+}
+
+to{
+transform:rotate(360deg);
+}
+
+}
+.stickerImg{
+
+position:fixed;
+
+width:700px;
+height:700px;
+
+object-fit:contain;
+
+z-index:20;
+
+pointer-events:none;
+
+filter:drop-shadow(0 0 35px #ff4d88);
+
+animation:imagenMover 12s linear forwards;
+
+}
+
+
+@keyframes imagenMover{
+
+0%{
+
+left:-800px;
+
+transform:
+translateY(100vh)
+rotate(-30deg)
+scale(.5);
+
+opacity:0;
+
+}
+
+
+20%{
+
+opacity:1;
+
+}
+
+
+50%{
+
+transform:
+translateY(40vh)
+rotate(20deg)
+scale(1);
+
+}
+
+
+100%{
+
+left:100vw;
+
+transform:
+translateY(-20vh)
+rotate(360deg)
+scale(.8);
+
+opacity:0;
+
+}
+
+
+}
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+#videoFondo{
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:100vw;
+    height:100vh;
+
+    object-fit:cover;
+
+    z-index:-9999;
+}
+</style>
+
+</head>
+
+<body>
+<video id="videoFondo" autoplay muted loop playsinline>
+    <source src="KARMA — Alien stage — ‘IVANTILL’ - IvanShipper (360p, h264).mp4" type="video/mp4">
+</video>
+<canvas id="canvas"></canvas>
+
+<audio id="musicPlayer" controls loop>
+    <source src="Química Mayor - Mon Laferte.mp3" type="audio/mpeg">
+    //Tu navegador no soporta audio.
+</audio>
+
+<div class="main">
+
+<div class="reproductor">
+
+<p class="playing">
+NOW PLAYING
+</p>
+
+<div class="disc">
+
+<img src="quimica_mayor.webp">
+
+</div>
+
+<div class="info">
+
+<h1>Química Mayor</h1>
+
+<p>Mon Laferte</p>
+
+</div>
+
+<div>
+
+<button id="prevBtn" class="control-btn">
+⏮
+</button>
+
+<button id="playPauseBtn" class="control-btn">
+▶
+</button>
+
+<button id="nextBtn" class="control-btn">
+⏭
+</button>
+
+</div>
+
+<div class="frase">
+
+"Porque contigo todo sabe a Química Mayor."
+
+</div>
+</div>
+
+</div>
+<!-- Corazones -->
+<div class="heart" style="left:8%;animation-delay:0s;">❤</div>
+<div class="heart" style="left:20%;animation-delay:2s;">❤</div>
+<div class="heart" style="left:35%;animation-delay:5s;">❤</div>
+<div class="heart" style="left:50%;animation-delay:1s;">❤</div>
+<div class="heart" style="left:65%;animation-delay:3s;">❤</div>
+<div class="heart" style="left:80%;animation-delay:6s;">❤</div>
+<div class="heart" style="left:92%;animation-delay:4s;">❤</div>
+
+<!-- Brillos -->
+<div class="spark" style="top:8%;left:10%;animation-delay:.2s;"></div>
+<div class="spark" style="top:18%;left:80%;animation-delay:1s;"></div>
+<div class="spark" style="top:30%;left:25%;animation-delay:2s;"></div>
+<div class="spark" style="top:65%;left:75%;animation-delay:3s;"></div>
+<div class="spark" style="top:82%;left:15%;animation-delay:1.5s;"></div>
+<div class="spark" style="top:90%;left:90%;animation-delay:2.6s;"></div>
+<!-- Corazones y frases románticas -->
+
+<div class="love"> ❤️</div>
+<div class="love"> ✨</div>
+<div class="love"> 💗</div>
+<div class="love"> 🌹</div>
+
+<div class="heart">❤</div>
+<div class="heart">❤</div>
+<div class="heart">❤</div>
+<div class="heart">❤</div>
+<div class="heart">❤</div>
+
+
+<style>
+
+.love{
+
+position:absolute;
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:45px;
+
+font-style:italic;
+
+font-weight:bold;
+
+color:#ffd1dc;
+
+text-shadow:
+
+0 0 10px #ff4d7d,
+0 0 25px #ff174f;
+
+animation:loveFloat 12s linear infinite;
+
+opacity:0;
+
+white-space:nowrap;
+
+}
+
+
+.love:nth-child(1){
+left:10%;
+animation-delay:0s;
+}
+
+.love:nth-child(2){
+left:55%;
+animation-delay:3s;
+}
+
+.love:nth-child(3){
+left:25%;
+animation-delay:6s;
+}
+
+.love:nth-child(4){
+left:70%;
+animation-delay:9s;
+}
+
+
+
+@keyframes loveFloat{
+
+
+0%{
+
+transform:translateY(120vh) scale(.5);
+
+opacity:0;
+
+}
+
+
+20%{
+
+opacity:1;
+
+}
+
+
+50%{
+
+transform:translateY(50vh) scale(1);
+
+}
+
+
+100%{
+
+transform:translateY(-20vh) scale(1.3);
+
+opacity:0;
+
+}
+
+
+}
+
+
+
+.heart{
+
+position:absolute;
+
+font-size:35px;
+
+color:#ff557d;
+
+text-shadow:
+
+0 0 15px #ff174f;
+
+animation:heartMove 10s infinite linear;
+
+}
+
+
+
+.heart:nth-of-type(5){
+left:15%;
+animation-delay:1s;
+}
+
+
+.heart:nth-of-type(6){
+left:35%;
+animation-delay:4s;
+}
+
+
+.heart:nth-of-type(7){
+left:60%;
+animation-delay:2s;
+}
+
+
+.heart:nth-of-type(8){
+left:85%;
+animation-delay:6s;
+}
+
+
+.heart:nth-of-type(9){
+left:45%;
+animation-delay:8s;
+}
+
+
+
+@keyframes heartMove{
+
+
+0%{
+
+transform:translateY(120vh) rotate(0deg);
+
+opacity:0;
+
+}
+
+
+20%{
+
+opacity:1;
+
+}
+
+
+100%{
+
+transform:translateY(-20vh) rotate(360deg);
+
+opacity:0;
+
+}
+
+
+}
+
+
+</style>
+<!-- Frases de amor flotando -->
+
+<div id="loveContainer"></div>
+<div id="imageStickers"></div>
+<style>
+
+.loveText{
+
+position:absolute;
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:35px;
+
+font-weight:bold;
+
+font-style:italic;
+
+color:#ffd6e0;
+
+text-shadow:
+0 0 10px #ff3366,
+0 0 25px #ff003c;
+
+white-space:nowrap;
+
+animation:moveLove linear infinite;
+
+z-index:5;
+
+}
+
+
+@keyframes moveLove{
+
+0%{
+
+transform:translate(0,110vh) rotate(-10deg);
+
+opacity:0;
+
+}
+
+
+15%{
+
+opacity:1;
+
+}
+
+
+50%{
+
+transform:translate(50px,50vh) rotate(10deg);
+
+}
+
+
+100%{
+
+transform:translate(-80px,-20vh) rotate(-15deg);
+
+opacity:0;
+
+}
+
+}
+.stickerImg{
+
+position:fixed;
+
+width:100px;
+height:100px;
+
+object-fit:contain;
+
+z-index:9999;
+
+pointer-events:none;
+
+filter:drop-shadow(0 0 15px #ff4d88);
+
+animation:imagenMover 10s linear forwards;
+
+}
+
+</style>
+
+
+<script>
+
+const frases=[
+
+"❤️ I love you so ❤️",
+
+"✨ Eres mi persona favorita ✨",
+
+"💗 Gracias por existir 💗",
+
+"🌹 Mi mundo es más bonito contigo 🌹",
+
+"💕 Siempre voy a elegirte 💕",
+
+"⭐ Eres mi lugar seguro ⭐",
+
+"💖 Contigo todo es especial 💖",
+
+"🌙 Mi canción favorita eres tú 🌙",
+
+"❤️ Te quiero muchísimo ❤️",
+
+"✨ Mi corazón sonríe cuando pienso en ti ✨"
+
+];
+
+
+const container=document.getElementById("loveContainer");
+
+
+function crearFrase(){
+
+
+let texto=document.createElement("div");
+
+texto.className="loveText";
+
+
+texto.innerHTML=
+frases[Math.floor(Math.random()*frases.length)];
+
+
+texto.style.left=Math.random()*80+"%";
+
+
+texto.style.animationDuration=
+(8+Math.random()*8)+"s";
+
+
+texto.style.fontSize=
+(25+Math.random()*25)+"px";
+
+
+container.appendChild(texto);
+
+
+
+setTimeout(()=>{
+
+texto.remove();
+
+},16000);
+
+
+}
+
+
+setInterval(crearFrase,1200);
+
+
+
+function crearStickerImagen(){
+
+let img=document.createElement("img");
+
+img.src=
+imagenes[Math.floor(Math.random()*imagenes.length)];
+
+
+img.className="stickerImg";
+
+
+img.style.top=
+Math.random()*70+"vh";
+
+
+document.getElementById("imageStickers")
+.appendChild(img);
+
+
+
+setTimeout(()=>{
+
+img.remove();
+
+},10000);
+
+
+}
+
+setInterval(crearStickerImagen,1200);
+const musicPlayer=document.getElementById("musicPlayer");
+const playPauseBtn=document.getElementById("playPauseBtn");
+const nextBtn=document.getElementById("nextBtn");
+const prevBtn=document.getElementById("prevBtn");
+
+const titulo=document.querySelector(".info h1");
+const artista=document.querySelector(".info p");
+const frase=document.querySelector(".frase");
+const canciones=[
+
+{
+nombre:"Química Mayor",
+artista:"Mon Laferte",
+archivo:"Química Mayor - Mon Laferte.mp3",
+frase:"Porque contigo todo sabe a Química Mayor ❤️"
+},
+
+{
+nombre:"Nuestra Casa",
+artista:"Mon Laferte",
+archivo:"Mon Laferte - Nuestra Casa (Letra) - jostland.mp3",
+frase:"Contigo cualquier lugar se siente como mi hogar 🏠✨"
+},
+
+
+{
+nombre:"Niño",
+artista:"Milo J",
+archivo:"Milo J - Niño (Official Video) - MILOJVEVO.mp3",
+frase:"Por lo menos podemos decir que fuimos fuertes"
+},
+
+{
+nombre:"Amárrame",
+artista:"Mon Laferte",
+archivo:"Mon Laferte - Amárrame ft. Juanes - MonLaferteVEVO.mp3",
+frase:"Hay conexiones que parecen hechas por el destino ❤️"
+},
+
+{
+nombre:"Online",
+artista:"Aria Bela",
+archivo:"Aria Bela - Online (Official Video) - Aria Bela.mp3",
+frase:"Puedo arrepentirme de todo menos de haberte conocido atraves de una pantalla ✨"
+},
+
+{
+nombre:"Disfruto",
+artista:"Carla Morrison",
+archivo:"Carla Morrison - Disfruto (letra) - Carla Morrison.mp3",
+frase:"Disfrutar cada momento contigo es un pequeño regalo 🌹"
+},
+
+{
+nombre:"Eres",
+artista:"Café Tacvba",
+archivo:"Café Tacvba - Eres (Video Oficial) - CafeTacubaVEVO.mp3",
+frase:"Hay personas que hacen que todo sea más bonito 💕"
+},
+
+{
+nombre:"Vámonos a Marte",
+artista:"Kevin Kaarl",
+archivo:"Kevin Kaarl - Vamonos a Marte - Kevin Kaarl.mp3",
+frase:"Aunque sea lejos, cualquier lugar contigo sería especial 🌌"
+},
+
+{
+nombre:"Brillas",
+artista:"León Larregui",
+archivo:"León Larregui - Brillas - LeonLarreguiVEVO.mp3",
+frase:"Algunas personas iluminan incluso los días más oscuros ✨"
+}
+
+];
+
+let indice=0;
+let reproduciendo=false;
+
+
+function cargarCancion(){
+
+musicPlayer.src=canciones[indice].archivo;
+
+titulo.innerHTML=canciones[indice].nombre;
+
+artista.innerHTML=canciones[indice].artista;
+
+frase.innerHTML='"'+canciones[indice].frase+'"';
+
+}
+
+
+function reproducir(){
+
+musicPlayer.play();
+
+playPauseBtn.innerHTML="❚❚";
+
+reproduciendo=true;
+
+}
+
+
+playPauseBtn.onclick=()=>{
+
+
+if(reproduciendo){
+
+musicPlayer.pause();
+
+playPauseBtn.innerHTML="▶";
+
+reproduciendo=false;
+
+
+}else{
+
+reproducir();
+
+}
+
+};
+
+
+
+nextBtn.onclick=()=>{
+
+indice++;
+
+if(indice>=canciones.length){
+
+indice=0;
+
+}
+
+cargarCancion();
+
+reproducir();
+
+};
+
+
+
+prevBtn.onclick=()=>{
+
+
+indice--;
+
+if(indice<0){
+
+indice=canciones.length-1;
+
+}
+
+
+cargarCancion();
+
+reproducir();
+
+};
+
+
+
+musicPlayer.onended=()=>{
+
+nextBtn.click();
+
+};
+
+
+
+cargarCancion();
+
+</script>
+
+<script>
+
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+
+class Petalo{
+
+constructor(){
+
+this.reset();
+
+}
+
+reset(){
+
+this.x=Math.random()*canvas.width;
+
+this.y=-30;
+
+this.size=Math.random()*18+10;
+
+this.speed=Math.random()*1.5+0.5;
+
+this.swing=Math.random()*2;
+
+this.angle=Math.random()*6.28;
+
+this.rotation=Math.random()*360;
+
+}
+
+update(){
+
+this.y+=this.speed;
+
+this.x+=Math.sin(this.angle)*this.swing;
+
+this.angle+=0.02;
+
+this.rotation+=1;
+
+if(this.y>canvas.height+30){
+
+this.reset();
+
+}
+
+this.draw();
+
+}
+
+draw(){
+
+ctx.save();
+
+ctx.translate(this.x,this.y);
+
+ctx.rotate(this.rotation*Math.PI/180);
+
+ctx.fillStyle="rgba(180,20,60,.85)";
+
+ctx.beginPath();
+
+ctx.moveTo(0,-this.size/2);
+
+ctx.bezierCurveTo(
+this.size/2,
+-this.size,
+this.size,
+this.size/3,
+0,
+this.size
+);
+
+ctx.bezierCurveTo(
+-this.size,
+this.size/3,
+-this.size/2,
+-this.size,
+0,
+-this.size/2
+);
+
+ctx.fill();
+
+ctx.restore();
+
+}
+
+}
+
+const petalos=[];
+
+for(let i=0;i<80;i++){
+
+petalos.push(new Petalo());
+
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+petalos.forEach(p=>p.update());
+
+requestAnimationFrame(animate);
+
+}
+
+animate();
+
+window.onresize=()=>{
+
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+
+};
+
+</script>
+
+<script>
+
+// Brillo del fondo
+
+setInterval(()=>{
+
+document.body.style.filter=
+"brightness("+(0.95+Math.random()*0.08)+")";
+
+},250);
+
+</script>
+
+</body>
+<a href="dedicatoria.html">
+
+</a>
+</body>
+</html>
